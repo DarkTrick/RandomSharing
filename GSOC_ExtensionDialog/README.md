@@ -11,6 +11,6 @@ The website is a prototype for the search-for-extensions-dialog. It shows how th
   how different font size would affect the design
 
 ### Why would you want resizable dialogs?
-. Why would you forcably remove a feature? Set a default and leave the rest up to the user? :)
-. Different systems have different font sizes. Maybe other systems use bigger font sizes. Their description would stretch out vertically.
-. For systems with a lot of vertical space it's rediculus to restrict the vertical of a dialog. Use the space if you have it.
+- Why would you forcably remove a feature? Set a default and leave the rest up to the user? :)
+- Different systems have different font sizes. Maybe other systems use bigger font sizes. Their description would stretch out vertically.
+- For systems with a lot of vertical space it's rediculus to restrict the vertical of a dialog. Use the space if you have it.

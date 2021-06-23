@@ -1,3 +1,7 @@
+### LibreOffice
+This folder is about a discussion on whether a certain dialog in LibreOffice Writer should be resizable or not.
+
+### Suggestion
 HTML view of the mockup can be found here:
 
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/DarkTrick/RandomSharing/blob/master/GSOC_ExtensionDialog/index.html

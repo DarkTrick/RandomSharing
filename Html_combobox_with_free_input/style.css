@@ -1,0 +1,15 @@
+
+.ComboBoxText{ display: inline-block;}
+.ComboBoxText > div {
+  position: relative;
+}
+.ComboBoxText select{
+  display: none;
+  position: absolute;
+  z-index: 5000;
+  user-select: none;
+}
+.ComboBoxText:focus-within select{
+  display: block;
+  width: 100%;
+}

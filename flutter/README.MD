@@ -3,10 +3,9 @@
 This is the way and resources I used to learn flutter.
 
 
-# Don't use these sources
+### Don't use these sources
 
-The following resources are regarded as *not good for learning*:
-
+The following resources have proven to not be useful for me:
 - flutter.dev/learn
   - Presenting non-working code
 
@@ -14,36 +13,31 @@ The following resources are regarded as *not good for learning*:
 # Tutorial
 
 ## Very first steps
+
 ### Preparation
 
-- No need to install everything first! Try out the online editor:
-  - https://dartpad.dev/?id
-  - → top left corner → *New Pad* → *Flutter Pad*
+No need to install everything first! Try out the online editor:
 
-- Video tutorial source:
-  This seems reasonable: https://www.youtube.com/watch?v=xWV71C2kp38&list=PLjxrf2q8roU3wk7CDw4RfV3mEwOJbjx1k&index=2
+https://dartpad.dev/?id
+
+→ top left corner → *New Pad* → *Flutter Pad*
 
 
 ### Basic information
+- [See this introductory tutorial](https://youtu.be/xWV71C2kp38?t=61)
+  - My notes:
+    - In flutter *everything is a widget*
+    - Widgets are immutable (unchangable by default)
+      - Therefore member vars of Widgets (`StatelessWidget`) are always `final`.
+    - State changes are always done through `setState(() { [YOUR CODE ] });`
+      - If you don't use `setState` for changes, the UI won't change.
+    - Widgets are being built in their `build` method.<br>
+      If the state changes, they are built newly, not changed.
+    -  In Flutter, all widgets are immutable; Flutter does not allow any changes of objects.
+       Widgets are like a recipe for making a cake. They just describe how things should be
+       and flutter builds the UI exactly as they describe it.
 
-- In flutter *everything is a widget*
-- Widgets are immutable (unchangable by default)
-  - Therefore member vars of Widgets (`StatelessWidget`) are always `final`.
-  - State changes are always done through `setState(() { [YOUR CODE ] });`
-    - If you don't use `setState` for changes, the UI won't change.
-  - Widgets are being built in their `build` method.<br>
-    If the state changes, they are built newly, not changed.
-
-- What's a `Scaffold`?
-  - Check out a dictionary (something like *construct* or *structure*)
-  - A `Scaffold` in flutter is a widget, that provides a basic layout for your screen/page:
-    - E.g. Top bar, body, bottom bar, side menu.
-
-### Hands-on start
-
-Use [dartpad](https://dartpad.dev/?id), set it to Flutter (Top left corner -> New pad -> Flutter) and erase all code.
-
-#### Very basic layout
+### Very basic layout
 (The following code will not yet compile.)
 
 This shows the most simple structure of a program
@@ -78,7 +72,7 @@ class MyApp extends StatelessWidget { // <-- define widget
 ```
 
 
-#### First running code
+### First running code
 
 This code runs, but does nothing except of saying "hey, I'm an app".
 
@@ -111,7 +105,7 @@ class MyApp extends StatelessWidget {
   - Derives from `WidgetsApp` (which can be an alternative).
   - Perhaps think of it as `GtkApplication`
 
-#### Hello World
+### Hello World
 
 Show *Hello World* on screen:
 
@@ -138,7 +132,7 @@ class MyApp extends StatelessWidget {
    In a `MaterialApp` the `home` member tells flutter what the topmost widget will be
 
 
-#### Your own visible widget
+### Your own visible widget
 
 Produce the same output as above, but add another layer of responsibility
 
@@ -174,7 +168,7 @@ class MyTopScreen extends StatelessWidget
 ```
 
 
-#### Create a nice looking screen
+### Create a nice looking screen
 
 Change the `MyTopScreen` class as below
 
@@ -207,7 +201,7 @@ class MyTopScreen extends StatelessWidget
 
 
 
-#### Create `TaskList`
+### Create `TaskList`
 
 Create a `TaskList` class (no checkboxes or input options, yet).
 
@@ -267,7 +261,7 @@ class TaskList extends StatelessWidget
 - The `Tasklist` is defined as a colum containing 4 `Text` widgets (verticall)
 
 
-#### Task list with (not checkable) checkboxes
+### Task list with (not checkable) checkboxes
 
 ```
 import 'package:flutter/material.dart';
@@ -347,13 +341,8 @@ class TaskItem extends StatelessWidget {
     - `Key?` means *Type `Key` or null*.
     - `required` means *cannot be null*.
 
-#### Sidenotes
 
-In Flutter, all widgets are immutable; Flutter does not allow any changes of objects.
-Widgets are like a recipe for making a cake. They just describe how things should be
-and flutter builds the UI exactly as they describe it.
-
-#### Introducing a changing UI (/state)
+### Introducing a changing UI (/state)
 
 We have to
 - make `TaskItem` a `StatefulWidget` and

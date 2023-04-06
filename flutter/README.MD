@@ -5,12 +5,19 @@ This is the way and resources I used to learn flutter.
 
 ### Don't use these sources
 
-The following resources have proven to not be useful for me:
+The following resources have proven to not be useful for me **as tutorials**:
 - flutter.dev/learn
-  - Presenting non-working code
+  - Presented code not working
+  - However, it might be useful as reference (e.g. *widget of the week* videos)
+- [medium.com: Parsing complex json in flutter](https://medium.com/flutter-community/parsing-complex-json-in-flutter-747c46655f51)
+  - For beginners this does not contain enough information to follow.
+  - Bad writing style for beginners
 
 
-# Tutorial
+# Flutter Tutorial
+
+*Note*: As soon as you feel confident, feel free to skip to the next chapter for learning about testing.
+I added a note for the time when I started to dig into tests.
 
 ## Very first steps
 
@@ -426,16 +433,59 @@ class _TaskItemState extends State<TaskItem> {
 }
 ```
 
+
+
 #### What? This ends here?
 
 Yes, the original tutorial I personally used did not go on from here.
 
 Unsatisfying, yes. But now we know some basics. From here we can go on
 
+## Button and Stateful widget
+
+On [gitbook.io](https://kodestat.gitbook.io/flutter/flutter-buttons-and-stateful-widgets),
+-  Copy and paste code
+-  Run and check what it does
+-  Clear your editor and type by hand the source code
+
+
 
 ## Create a chat app
 
 While following [this tutorial](https://codelabs.developers.google.com/codelabs/flutter/#3), see the notes below (if you think they could help you).
+
+
+
+## Different Screens: *Routes*
+
+On [gitbook.io/routes](https://kodestat.gitbook.io/flutter/flutter-basic-navigation-and-routes/simple-routes-using-stateless-widget),
+-  Copy and paste code
+-  Run and check what it does
+-  Clear your editor and type by hand the source code
+
+
+Notes:
+
+- Define `routes` in `MaterialApp`:<br>
+   ```routes: <String, WidgetBuilder>{
+      "/SecondPage": (BuildContext context) => new SecondPage()
+    }```
+- Open page: `Navigator.of(context).pushNamed("/SecondPage");`
+- Reset route stack and open a specific path:
+  `Navigator.of(context).pushNamedAndRemoveUntil("/HomePage", (_) => false)`
+
+- The tutorial uses *Named routes*. There are also non-named routes: `Navigator.push(context, MaterialPageRoute (builder: (context) => SecondPage()));`. <br>
+  **Why do you want named routes?**
+    - AW: [source 1](https://github.com/flutter/flutter/issues/3867), [source 2](https://stackoverflow.com/questions/60463022/navigator-push-vs-navigator-pushnamed-when-passing-data-to-screen):
+      - Works only with named routes:
+        - Resume app after destruction (not personally verified).
+        - Code sharing between mobile and web apps (unknown meaning)
+      - Easier with named routes:
+        - Specific sites for logged in users only (not personally verified).
+
+- `FloatingActionButton`: ![Floating Action Button example screen](media/floating_action_button.png)
+
+
 
 ### Notes from the tutorial
 
@@ -453,21 +503,50 @@ While following [this tutorial](https://codelabs.developers.google.com/codelabs/
   - Reference: https://stackoverflow.com/a/52713953/6702598
 
 
+### How can I restart an animation?
+```
+animationController.reset();
+animationController.forward();
+```
+
+
+## Style buttons
+
+TODO: under construction!
+
+Essentially this: You don't style the button, but the container inside the button:
+```
+TextButton (
+  child: Container (
+    child: new Text("click me"),
+    // do container decorations here
+  ),
+)
+```
+
+## Very interesting podcasts (2h)
+
+- http://fragmentedpodcast.com/episodes/118/
+- http://fragmentedpodcast.com/episodes/119/ (first third)
+
+
+## Note: I started unit testing here
+
+At this point I started unit testing (see next section).
+
+## Next chapter
+
+
 ## TODO: Next up ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 **The following are personal notes: resources that have not yet proven to be valid**
 
-- Anlesen und gucken, ob es einzuorgnen oder wegzuwerfen ist:
-  - https://www.freecodecamp.org/news/learn-flutter-best-resources-18f88346ed0f/
-
-- Making a TODO app with flutter:
-  - https://medium.com/the-web-tub/making-a-todo-app-with-flutter-5c63dab88190
-
-- Parsing complex JSON in Flutter
-  - https://medium.com/flutter-community/parsing-complex-json-in-flutter-747c46655f51
 
 - Andere codelab tutorials:
   https://github.com/flutter/codelabs
+    - webview: https://codelabs.developers.google.com/codelabs/flutter-webview
+
+- How to write tests?
 
 - Huge information collection about flutter:
   - https://github.com/flutter/codelabs
@@ -475,8 +554,116 @@ While following [this tutorial](https://codelabs.developers.google.com/codelabs/
 - Anlesen und gucken ob brauchbar oder Muell:
   - hackr.io/tutorials/learn-flutter?q=Flutter
 
+
+- examples/Understand canvas_draw_on_screen_by_touch.dart
+- Create popup window with stacked buttons instead of side-by-side
+- Learn about [GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
+
+Further questions
+- How can I animate stuff moving around on the screen?
+- How can I animate a simple int value change?
+  - Animate the `elevation` parameter of an app Bar
+
+
 - Books:
   - Learn flutter fast (10USD)
     - https://www.amazon.com/Learn-Google-Flutter-Fast-Example/dp/1092297375
   - beginning flutter (24 USD)
     - https://www.amazon.com/Beginning-Flutter-Hands-Guide-Development/dp/1119550823
+
+
+# Testing: How to write Tests
+
+## One single passing test
+- Create a flutter project with Android Studio
+- inside `test/widget_test.dart`, you can write
+
+```
+void main() {
+
+  test('test - everything is alright', (){
+    expect (true, true); // passes
+  });
+```
+## Group tests
+- Create a flutter project with Android Studio
+- inside `test/widget_test.dart`, you can write
+
+```
+void main() {
+
+  group('validation tests', () {
+
+    test('validate 1', (){
+      expect (true, true); // passes
+    });
+
+    test('validate 2', (){
+      expect (true, true); // passes
+    });
+
+  });
+```
+## Testing widgets 1: Introduction
+
+Read *[An introduction to widget testing ](https://docs.flutter.dev/cookbook/testing/widget/introduction)* and the other chapters
+
+
+### Can't test? mysterious error?
+- If you test your own code, you receive an un-understandable error?
+  - Perhaps you used a `Flexible` widget without a `Row` or `Column` as parent? (aka *Incorrect use of ParentData widget*)
+  - Otherwise look at the [complete list of possible problems, here](https://docs.flutter.dev/testing/common-errors)
+
+### How to read exceptions
+
+This can be a possible output of the first lines of your code:
+```
+/opt/homebrew/Caskroom/flutter/2.10.5/flutter/bin/flutter --no-color test --machine --start-paused --name "test login button(\s*\(variant: .*\))?$" test/widget_test.dart
+Testing started at 18:40 ...
+
+══╡ EXCEPTION CAUGHT BY WIDGETS LIBRARY ╞═══════════════════════════════════════════════════════════
+The following assertion was thrown while applying parent data.:
+Incorrect use of ParentDataWidget.
+
+[...]
+
+When the exception was thrown, this was the stack:
+[...]
+```
+
+If you want to search what went wrong, search for `Incorrect use of ParentDataWidget` online.
+Generally, this is probably the location where you want to look for what went wrong.
+
+
+
+### Notes
+- Manage tests
+  - Create `*_test.dart` files inside the `test` folder.
+  - Create a `void main()` in each file conaining `test()` methods (see below)
+    - Yes, every file has it's own `main` method. And no, that's no problem.
+- non-widget testing:
+  - `test('test description', () { ...; expect (true, true); });`
+- Widget testing:
+  - `testWidget('test description', (WidgetTester tester) async { ...; expect(true, true); });`
+- Render a widget:
+  - `tester.pumpWidget(mywidget)`
+- *Finding* widgets (`document.getElementBy...`):
+  - By text content: `find.text("mytext")` <br>
+    (`find` is a predefined global in `flutter_test`)
+  - By `key`: `find.byKey('mykey')`
+    - widget needs to define `key: 'mykey',` for this
+
+
+
+# References:
+- https://kodestat.gitbook.io/flutter/
+
+
+
+<style>
+img{
+  max-width: 600px;
+  max-height: 400px;
+  height: auto;
+  }
+</style>
